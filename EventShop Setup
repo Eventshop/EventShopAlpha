@@ -1,0 +1,49 @@
+Eventshop has 3 essential components --
+1) HTML5, Backbone.js UI + Jersey REST services/Servlets + Java code
+2) C++ Components interacting with the Java code
+3) Mysql database, parts of which we are planning to move to Mongo
+
+Overall Architecture --
+Its a decoupled architecture with the presentation separated from the back-end through a REST layer.
+The UI has been built with Twitter Bootstrap, Jquery, Backbone.js for the front-end MVC and Javascript.
+This interacts to the server side either through REST services for most of its transactions. It talks to the RegisterServlet to start or stop datasources and queries
+The REST services talk to the DAO layer and other business logic built in the Java layer
+
+For the database
+1) Install Mysql server
+2) Create the schema dbeventshop with user as eventshop 
+3) Grant all on dbeventshop.* to 'eventshop'@'localhost' identified by 'eventshop'
+4) Run the sql scripts to set up the tables or import the sample db.
+
+
+The setup of the Java project would require the following  --
+1. JDK1.5 or above
+2. Apache Tomcat 6.0 or above
+3. Eclipse with REST and Maven plugins. We have used Indigo
+	
+Steps to setup the Eclipse environment
+1.	Install Maven Integration for Eclipse (m2e). The simplest way to do this is to select
+“Eclipse Marketplace…” from the help menu. Type “maven integration” into the search box, then from the list that eventually appears, choose and install “Maven Integration for Eclipse (m2e)”.  restart Eclipse.	
+2.	Install Maven Integration for Eclipse WTP (m2e-wtp) using the same procedure as in the previous step. 
+3.	In Eclipse, open the Window->Preferences menu. On the left side, expand “Server”, then select “Runtime Environments”. On the right side of the dialog, click the Add button. In the dialog that pops up, select the version of Tomcat you installed, check the “Create a new local server” checkbox, then click Next. Fill in the “Tomcat installation directory” field to where you installed Tomcat, then click Finish
+4. Now you can import our project from the eventshoplinux folder where the pom.xml exists
+5. Incase the maven plugin is unable to get fetch a few of the libraries such as jai_imageio-1.1.jar, jai-codec-1.1.3.jar you could download them and point to the external lib folder as a workaround
+6. Modify the config.propertiess file with the information of your environment such as the location of the mysql database
+7. Run a maven build and then deploy it on tomcat through Eclipse
+8. Incase the sample db has been imported, you can login with eventshop@hcl.com/test
+
+The setup of the C++ project would require the corresponding Eclipse SDK.
+
+The pre-requisites of this installation are -
+1) OpenCV
+2) Protobuf
+
+Specific to Windows
+1) Please install cygwin or mingw
+
+Steps to setup the Eclipse environment
+1) Point the target directory to webapps/proc/Debug/src of the Java project as the two are interlinked
+2) The java class QueryJSONParser  generates .cc files within the webapps/proc/src folderwhich would need to be compiled by webapps/proc/Debug/compile.sh. 
+
+
+
